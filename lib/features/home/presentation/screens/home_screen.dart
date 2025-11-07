@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:foodie/core/common/widgets/custom_submit_button.dart';
 import 'package:foodie/core/common/widgets/custom_text.dart';
 import 'package:foodie/core/common/widgets/custom_textformfield.dart';
 import 'package:foodie/core/utils/app_colors.dart';
