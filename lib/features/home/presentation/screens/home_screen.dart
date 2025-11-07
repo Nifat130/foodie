@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/core/common/widgets/custom_text.dart';
 import 'package:foodie/core/common/widgets/custom_textformfield.dart';
+import 'package:foodie/core/common/widgets/food_picture.dart';
 import 'package:foodie/core/utils/app_colors.dart';
 import 'package:foodie/core/utils/app_images.dart';
 import 'package:foodie/features/home/controllers/home_controller.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../widgets/actuals/app_header_widget.dart';
+import '../widgets/actuals/nav_bar_button.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -271,88 +273,96 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 110,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            padding: EdgeInsets.only(left: 16, top: 8, bottom: 8),
-                            itemBuilder: (context, index){
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.textWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withAlpha(50), // shadow color
-                                      blurRadius: 4,
-                                      offset: const Offset(2, 2),           // position of the shadow
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(right: 8),
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 4),
-                                          child: ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.asset(AppImages.dummyFoodPicture, width: 80, height: double.infinity, fit: BoxFit.fill,)),
-                                        ),
-                                        Positioned(
-                                          top: 16,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: AppColors.lightGreen,
-                                                borderRadius: BorderRadius.only(topRight: Radius.circular(8), bottomRight: Radius.circular(8))
-                                            ),
-                                            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                            child: CustomText(text: "20% off", color: AppColors.textWhite, fontWeight: FontWeight.w500, fontSize: 8,),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 8),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        spacing: 2,
+                        Obx(() =>
+                          controller.isCampaignFoodLoading.value ?
+                              SizedBox() :
+                          SizedBox(
+                            height: 110,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.campaignFoodData.length >= 5 ? 5 : controller.campaignFoodData.length,
+                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              itemBuilder: (context, index){
+                                final campaignFood = controller.campaignFoodData[index];
+                                final discountPrice = controller.calculateDiscount(type: campaignFood.discountType, actualPrice: campaignFood.price.toString(), discount: campaignFood.discount.toString());
+                                final rating = controller.starCount(star: campaignFood.avgRating);
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: AppColors.textWhite,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withAlpha(50), // shadow color
+                                        blurRadius: 4,
+                                        offset: const Offset(2, 2),           // position of the shadow
+                                      ),
+                                    ],
+                                  ),
+                                  margin: EdgeInsets.only(right: 8),
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Stack(
                                         children: [
-                                          CustomText(text: "Burger", fontSize: 12, fontWeight: FontWeight.w600, textOverflow: TextOverflow.ellipsis,),
-                                          CustomText(text: "Mc Donald", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.textSecondary, textOverflow: TextOverflow.ellipsis,),
-                                          Row(
-                                            children: [
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                            ],
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4),
+                                            child: ClipRRect(borderRadius: BorderRadius.circular(8), 
+                                                child: FoodPicture(imageLink: campaignFood.imageFullUrl!, width: 80,)
+                                            ),
                                           ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CustomText(text: "\$5", fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textBlue,),
-                                              SizedBox(width: 4,),
-                                              CustomText(text: "\$10", fontSize: 8, fontWeight: FontWeight.w600, color: AppColors.textSecondary, decoration: TextDecoration.lineThrough,),
-                                              SizedBox(width: 24,),
-                                              GestureDetector(
-                                                onTap: (){},
-                                                child: Icon(Icons.add, color: AppColors.textPrimary, size: 24,),
+                                          Positioned(
+                                            top: 16,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.lightGreen,
+                                                  borderRadius: BorderRadius.only(topRight: Radius.circular(8), bottomRight: Radius.circular(8))
                                               ),
-                                            ],
+                                              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                              child: CustomText(text: "${campaignFood.discount}${campaignFood.discountType == "percent" ? "%" : "\$"} off", color: AppColors.textWhite, fontWeight: FontWeight.w500, fontSize: 8,),
+                                            ),
                                           )
                                         ],
                                       ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 8),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 2,
+                                          children: [
+                                            CustomText(text: campaignFood.name ?? "Unknown", fontSize: 12, fontWeight: FontWeight.w600, textOverflow: TextOverflow.ellipsis,),
+                                            CustomText(text: campaignFood.restaurantName ?? "Unknown" , fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.textSecondary, textOverflow: TextOverflow.ellipsis,),
+                                            Row(
+                                              children: [
+                                                for(int i = 0; i < rating; i++)
+                                                  Icon(Icons.star, color: AppColors.success, size: 12,),
+                                                if(rating == 0)
+                                                  CustomText(text: "No ratings", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.success, textOverflow: TextOverflow.ellipsis, maxLines: 1,)
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                CustomText(text: "\$${discountPrice.toStringAsFixed(2)}", fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textBlue,),
+                                                SizedBox(width: 4,),
+                                                CustomText(text: "\$${campaignFood.price}", fontSize: 8, fontWeight: FontWeight.w600, color: AppColors.textSecondary, decoration: TextDecoration.lineThrough,),
+                                                SizedBox(width: 24,),
+                                                GestureDetector(
+                                                  onTap: (){},
+                                                  child: Icon(Icons.add, color: AppColors.textPrimary, size: 24,),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          )
                         ),
                         SizedBox(height: 8,),
                         Padding(
@@ -366,75 +376,81 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         /// GPT here this part I wanna convert into a ListView.builder
-                        ListView.builder(
-                          itemCount: controller.posterImageList.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final restaurant = controller.posterImageList[index];
-
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: AppColors.textWhite,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withAlpha(50), // shadow color
-                                    blurRadius: 4,
-                                    offset: const Offset(2, 2),           // position of the shadow
+                        Obx(() =>
+                          controller.isRestaurantLoading.value ?
+                              SizedBox() :
+                          ListView.builder(
+                            itemCount: controller.restaurantData.restaurants!.length,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final restaurant = controller.restaurantData.restaurants![index];
+                              final rating = controller.starCount(star: restaurant.avgRating);
+                              return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: AppColors.textWhite,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withAlpha(50), // shadow color
+                                        blurRadius: 4,
+                                        offset: const Offset(2, 2),           // position of the shadow
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                              margin: EdgeInsets.only(bottom: 8),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    spacing: 8,
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                  margin: EdgeInsets.only(bottom: 8),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.asset(AppImages.dummyFoodPicture, width: 90, fit: BoxFit.fill,)),
+                                      Expanded(
+                                        child: Row(
+                                          spacing: 8,
+                                          children: [
+                                            ClipRRect(borderRadius: BorderRadius.circular(8), child: FoodPicture(imageLink: restaurant.logoFullUrl!, width: 90,)),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                spacing: 4,
+                                                children: [
+                                                  CustomText(text: restaurant.name ?? "Unknown", fontSize: 12, fontWeight: FontWeight.w600, textOverflow: TextOverflow.ellipsis,),
+                                                  CustomText(text: restaurant.address ?? "Unknown", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.textSecondary, textOverflow: TextOverflow.ellipsis, maxLines: 2,),
+                                                  Row(
+                                                    children: [
+                                                      for(int i = 0; i < rating; i++)
+                                                      Icon(Icons.star, color: AppColors.success, size: 12,),
+                                                      if(rating == 0)
+                                                        CustomText(text: "No ratings", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.success, textOverflow: TextOverflow.ellipsis, maxLines: 1,)
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                       Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        spacing: 2,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        spacing: 30,
                                         children: [
-                                          CustomText(text: "Burger", fontSize: 12, fontWeight: FontWeight.w600, textOverflow: TextOverflow.ellipsis,),
-                                          CustomText(text: "Mc Donald", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.textSecondary, textOverflow: TextOverflow.ellipsis,),
-                                          Row(
-                                            children: [
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                              Icon(Icons.star, color: AppColors.success, size: 12,),
-                                            ],
+                                          GestureDetector(
+                                            onTap: (){},
+                                            child: Icon(Icons.favorite_border_rounded, color: AppColors.textSecondary,),
                                           ),
-                                          CustomText(text: "\$5", fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textBlue,),
+                                          GestureDetector(
+                                              onTap: (){},
+                                              child: Icon(Icons.add)),
                                         ],
                                       )
                                     ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    spacing: 15,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: (){},
-                                        child: Icon(Icons.favorite_border_rounded),
-                                      ),
-                                      GestureDetector(
-                                          onTap: (){},
-                                          child: Icon(Icons.add)),
-                                    ],
                                   )
-                                ],
-                              )
-                            );
-                          },
+                              );
+                            },
+                          )
                         ),
 
                       ],
@@ -451,18 +467,25 @@ class HomeScreen extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.textWhite
+                color: AppColors.textWhite,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.blueGrey.withAlpha(100), // shadow color
+                    blurRadius: 4,
+                    offset: const Offset(4, 4),           // position of the shadow
+                  ),
+                ],
               ),
               margin: EdgeInsets.only(top: 30),
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.home_filled, color: AppColors.success, size: 28,),
-                  Icon(Icons.favorite_border_rounded, color: AppColors.success, size: 28,),
-                  Icon(Icons.favorite_border_rounded, color: AppColors.textWhite, size: 28,),
-                  Icon(Icons.edit_note_outlined, color: AppColors.success, size: 32,),
-                  Icon(Icons.menu, color: AppColors.success, size: 28,),
+                  NavBarButton(controller: controller, buttonNumber: 0, icon: Icons.home_filled,),
+                  NavBarButton(controller: controller, buttonNumber: 1, icon: Icons.favorite_border_rounded,),
+                  NavBarButton(controller: controller, buttonNumber: 2, icon: Icons.favorite_border_rounded,),
+                  NavBarButton(controller: controller, buttonNumber: 3, icon: Icons.edit_note_outlined,),
+                  NavBarButton(controller: controller, buttonNumber: 4, icon: Icons.menu,),
                 ],
               ),
             ),
@@ -485,5 +508,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 

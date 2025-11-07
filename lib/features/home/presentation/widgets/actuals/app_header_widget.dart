@@ -78,6 +78,7 @@ class AppHeaderWidget extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 8,)
         ],
       ),
     );

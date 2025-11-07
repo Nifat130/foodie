@@ -52,7 +52,7 @@ class AppSnackBar {
 
       snackPosition: SnackPosition.TOP,
       // ignore: deprecated_member_use
-      backgroundColor: Colors.green.withOpacity(0.9),
+      backgroundColor: Colors.green.withAlpha(225),
       colorText: Colors.white,
       borderRadius: 10.0,
       margin: const EdgeInsets.all(10.0),

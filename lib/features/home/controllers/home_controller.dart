@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   RxBool isLoading = true.obs;
 
   RxInt currentPoster = 1.obs;
+  RxInt currentIndex = 0.obs;
 
   var posterImageList = [
     AppImages.dummyFoodPicture,
@@ -135,5 +136,27 @@ class HomeController extends GetxController {
     );
 
     isRestaurantLoading.value = false;
+  }
+
+  // Calculate Campaign Food Discount
+  double calculateDiscount({required String? type, required String actualPrice, required String discount}){
+    final ap = double.parse(actualPrice);
+    final d = double.parse(discount);
+    if(type == "percent"){
+      return ap - (ap * (d / 100));
+    }
+    else{
+      return ap - d;
+    }
+  }
+
+  int starCount({dynamic star}){
+    if(star.runtimeType == double){
+      log((star as double).floor().toString());
+      return (star as double).floor();
+    }
+    else{
+      return star;
+    }
   }
 }
