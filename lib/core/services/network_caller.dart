@@ -14,8 +14,10 @@ class NetworkCaller {
       final Response response = await get(
         Uri.parse(endpoint),
         headers: {
-          'Authorization': token!,
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
+          'zoneId': '[1]',
+          'latitude': '23.735129',
+          'longitude': '90.425614'
         },
       ).timeout(Duration(seconds: timeoutDuration));
       return _handleResponse(response);
@@ -24,85 +26,6 @@ class NetworkCaller {
     }
   }
 
-  Future<ResponseData> postRequest(String endpoint,
-      {Map<String, dynamic>? body, String? token}) async {
-    //AppLoggerHelper.info('POST Request: $endpoint');
-    //AppLoggerHelper.info('Request Body: ${jsonEncode(body.toString())}');
-
-    try {
-      final Response response = await post(
-        Uri.parse(endpoint),
-        headers: {
-          'Authorization': token!,
-          'Content-type': 'application/json',
-        },
-        body: jsonEncode(body),
-      ).timeout(Duration(seconds: timeoutDuration));
-      return _handleResponse(response);
-    } catch (e) {
-      return _handleError(e);
-    }
-  }
-
-  Future<ResponseData> putRequest(String endpoint,
-      {Map<String, dynamic>? body, String? token}) async {
-    //AppLoggerHelper.info('PUT Request: $endpoint');
-    //AppLoggerHelper.info('Request Body: ${jsonEncode(body.toString())}');
-
-    try {
-      final Response response = await put(
-        Uri.parse(endpoint),
-        headers: {
-          'Authorization': token!,
-          'Content-type': 'application/json',
-        },
-        body: jsonEncode(body),
-      ).timeout(Duration(seconds: timeoutDuration));
-      return _handleResponse(response);
-    } catch (e) {
-      return _handleError(e);
-    }
-  }
-
-  Future<ResponseData> patchRequest(
-      String endpoint, {
-        Map<String, dynamic>? body,
-        String? token,
-      }) async {
-    //AppLoggerHelper.info('PATCH Request: $endpoint');
-    //AppLoggerHelper.info('Request Body: ${jsonEncode(body)}');
-
-    try {
-      final Response response = await patch(
-        Uri.parse(endpoint),
-        headers: {
-          'Authorization': token!,
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(body),
-      ).timeout(Duration(seconds: timeoutDuration));
-
-      return _handleResponse(response);
-    } catch (e) {
-      return _handleError(e);
-    }
-  }
-
-  Future<ResponseData> deleteRequest(String endpoint, String? token) async {
-    //AppLoggerHelper.info('DELETE Request: $endpoint');
-    try {
-      final Response response = await delete(
-        Uri.parse(endpoint),
-        headers: {
-          'Authorization': token!,
-          'Content-type': 'application/json',
-        },
-      ).timeout(Duration(seconds: timeoutDuration));
-      return _handleResponse(response);
-    } catch (e) {
-      return _handleError(e);
-    }
-  }
 
   // Handle the response from the server
   Future<ResponseData> _handleResponse(http.Response response) async {
