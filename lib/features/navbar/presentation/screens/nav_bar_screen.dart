@@ -54,7 +54,7 @@ class NavBarScreen extends StatelessWidget {
                       NavBarButton(
                         controller: controller,
                         buttonNumber: 2,
-                        icon: Icons.favorite_border_rounded,
+                        icon: Icons.shopping_cart_rounded,
                       ),
                       NavBarButton(
                         controller: controller,

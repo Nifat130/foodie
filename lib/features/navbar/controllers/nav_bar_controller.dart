@@ -12,8 +12,8 @@ class NavBarController extends GetxController {
   var listOfScreens = [
     HomeScreen(),
     DummyScreen(statusText: "Favorite Screen"),
-    DummyScreen(statusText: "Cart Screen"),
-    DummyScreen(statusText: "Bookmark Screen"),
-    DummyScreen(statusText: "List Screen"),
+    DummyScreen(statusText: "Wishlist Screen"),
+    DummyScreen(statusText: "Notes Screen"),
+    DummyScreen(statusText: "More Screen"),
   ];
 }

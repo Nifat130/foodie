@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/core/common/widgets/custom_text.dart';
-import 'package:foodie/core/common/widgets/custom_textformfield.dart';
 import 'package:foodie/core/common/widgets/food_picture.dart';
 import 'package:foodie/core/utils/app_colors.dart';
 import 'package:foodie/core/utils/app_images.dart';
@@ -47,46 +45,38 @@ class HomeScreen extends StatelessWidget {
                         Obx(() =>
                           controller.isBannerLoading.value ?
                               SizedBox() :
-                          CarouselSlider(
-                            options: CarouselOptions(
-                                height: 120,
-                                autoPlay: true,
-                                enlargeCenterPage: false,
-                                viewportFraction: 0.8,
-                                initialPage: 1,
-                                autoPlayInterval: const Duration(seconds: 5),
-                                autoPlayAnimationDuration: const Duration(milliseconds: 300),
-                                onPageChanged: (i, reason){
-                                  controller.currentPoster.value = i;
-                                }
-                            ),
-                            items: controller.bannerData.banners!.map((banner) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 12),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: FadeInImage.assetNetwork(
-                                        placeholder: AppImages.dummyFoodPicture,
-                                        image: banner.restaurant!.foods![0].imageFullUrl!,
-                                        fit: BoxFit.cover,
-                                        width: MediaQuery.of(context).size.width,
-                                        fadeInDuration: const Duration(milliseconds: 300),
-                                        fadeOutDuration: const Duration(milliseconds: 200),
-                                        imageErrorBuilder: (context, error, stackTrace) {
-                                          return Image.asset(
-                                            AppImages.dummyFoodPicture, // fallback asset image
-                                            fit: BoxFit.fill,
-                                            width: MediaQuery.of(context).size.width,
-                                          );
-                                        },
-                                      ),
-                                    ),
+                          LayoutBuilder(
+                            builder: (context, constraints){
+                              final width = constraints.maxWidth;
+
+                              return CarouselSlider(
+                                options: CarouselOptions(
+                                    height: width * 0.25,
+                                    autoPlay: true,
+                                    enlargeCenterPage: false,
+                                    viewportFraction: width < 600 ? 0.8 : 0.6,
+                                    initialPage: 1,
+                                    autoPlayInterval: const Duration(seconds: 5),
+                                    autoPlayAnimationDuration: const Duration(milliseconds: 300),
+                                    onPageChanged: (i, reason){
+                                      controller.currentPoster.value = i;
+                                    }
+                                ),
+                                items: controller.bannerData.banners!.map((banner) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 12),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(16),
+                                          child: FoodPicture(imageLink: banner.restaurant!.foods![0].imageFullUrl!),
+                                        ),
+                                      );
+                                    },
                                   );
-                                },
+                                }).toList(),
                               );
-                            }).toList(),
+                            },
                           )
                         ),
                         SizedBox(height: 8,),
@@ -121,59 +111,48 @@ class HomeScreen extends StatelessWidget {
                         Obx(() =>
                           controller.isCategoriesLoading.value ?
                               SizedBox() :
-                          SizedBox(
-                            height: 80,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.only(right: 16),
-                              itemCount: 7,
-                              itemBuilder: (context, index){
-                                final category = controller.categoriesData[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: Column(
-                                    spacing: 4,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
-                                          color: AppColors.textWhite,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withAlpha(50), // shadow color
-                                              blurRadius: 4,
-                                              offset: const Offset(2, 2),           // position of the shadow
+                          LayoutBuilder(
+                            builder: (context, constraints){
+                              final width = constraints.maxWidth;
+                              return SizedBox(
+                                height: (80*(width < 650 ? 1 : 2)),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: EdgeInsets.only(right: 16),
+                                  itemCount: 7,
+                                  itemBuilder: (context, index){
+                                    final category = controller.categoriesData[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Column(
+                                        spacing: 4,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: AppColors.textWhite,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withAlpha(50), // shadow color
+                                                  blurRadius: 4,
+                                                  offset: const Offset(2, 2),           // position of the shadow
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(4),
-                                          child: FadeInImage.assetNetwork(
-                                            placeholder: AppImages.dummyFoodPicture,
-                                            image: category.imageFullUrl!,
-                                            fit: BoxFit.cover,
-                                            width: 40,
-                                            height: 40,
-                                            fadeInDuration: const Duration(milliseconds: 300),
-                                            fadeOutDuration: const Duration(milliseconds: 200),
-                                            imageErrorBuilder: (context, error, stackTrace) {
-                                              return Image.asset(
-                                                AppImages.dummyFoodPicture, // fallback asset image
-                                                fit: BoxFit.fill,
-                                                width: 40,
-                                                height: 40,
-                                              );
-                                            },
+                                            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(4),
+                                              child: FoodPicture(imageLink: category.imageFullUrl!, width: (40*(width < 650 ? 1 : 2)), height: (40*(width < 650 ? 1 : 2)),),
+                                            ),
                                           ),
-                                        ),
+                                          CustomText(text: category.name ?? "None", fontSize: 12, fontWeight: FontWeight.w600, textAlign: TextAlign.center,)
+                                        ],
                                       ),
-                                      CustomText(text: category.name ?? "None", fontSize: 12, fontWeight: FontWeight.w600, textAlign: TextAlign.center,)
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                           )
                         ),
                         SizedBox(height: 8,),

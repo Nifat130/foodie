@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:foodie/features/home/presentation/widgets/actuals/pop_up_button.dart';
 
 import '../../../../../core/common/widgets/custom_text.dart';
 import '../../../../../core/common/widgets/custom_textformfield.dart';
@@ -63,20 +64,34 @@ class AppHeaderWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16),
-          CustomTextFormField(
-            controller: TextEditingController(),
-            hintText: "Search food or restaurant here...",
-            suffixIcon: InkResponse(
-              onTap: () {
-                log("clicked");
-              },
-              radius: 15,
-              splashColor: AppColors.primary.withAlpha(50),
-              child: Icon(
-                Icons.search,
-                color: AppColors.textSecondary,
-              ),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints){
+              final width = constraints.maxWidth;
+              return Row(
+                spacing: 16,
+                children: [
+                  if(width >= 600)
+                    PopUpButton(),
+                  Expanded(
+                    child: CustomTextFormField(
+                      controller: TextEditingController(),
+                      hintText: "Search food or restaurant here...",
+                      suffixIcon: InkResponse(
+                        onTap: () {
+                          log("clicked");
+                        },
+                        radius: 15,
+                        splashColor: AppColors.primary.withAlpha(50),
+                        child: Icon(
+                          Icons.search,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           SizedBox(height: 8,)
         ],
@@ -84,3 +99,5 @@ class AppHeaderWidget extends StatelessWidget {
     );
   }
 }
+
+
