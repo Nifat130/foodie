@@ -9,7 +9,7 @@ class NetworkCaller {
   final int timeoutDuration = 10;
 
   Future<ResponseData> getRequest(String endpoint, {String? token}) async {
-    //AppLoggerHelper.info('GET Request: $endpoint');
+    log('GET Request: $endpoint');
     try {
       final Response response = await get(
         Uri.parse(endpoint),
@@ -29,8 +29,8 @@ class NetworkCaller {
 
   // Handle the response from the server
   Future<ResponseData> _handleResponse(http.Response response) async {
-    //AppLoggerHelper.info('Response Status: ${response.statusCode}');
-    //AppLoggerHelper.info('Response Body: ${response.body}');
+    log('Response Status: ${response.statusCode}');
+    log('Response Body: ${response.body}');
 
     try {
       final decodedResponse = jsonDecode(response.body);
