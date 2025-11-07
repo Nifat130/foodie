@@ -263,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomText(text: "Popular Food Nearby", fontSize: 16, fontWeight: FontWeight.w700,),
+                              CustomText(text: "Food Campaign", fontSize: 16, fontWeight: FontWeight.w700,),
                               GestureDetector(onTap: (){}, child: CustomText(text: "View All", fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.success, decoration: TextDecoration.underline, decorationColor: AppColors.success, decorationThickness: 1,)),
                             ],
                           ),
