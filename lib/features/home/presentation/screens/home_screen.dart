@@ -352,6 +352,89 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                         ),
+                        SizedBox(height: 8,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(text: "Restaurants", fontSize: 16, fontWeight: FontWeight.w700,),
+                              GestureDetector(onTap: (){}, child: CustomText(text: "View All", fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.success, decoration: TextDecoration.underline, decorationColor: AppColors.success, decorationThickness: 1,)),
+                            ],
+                          ),
+                        ),
+                        /// GPT here this part I wanna convert into a ListView.builder
+                        ListView.builder(
+                          itemCount: controller.posterImageList.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final restaurant = controller.posterImageList[index];
+
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColors.textWhite,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withAlpha(50), // shadow color
+                                    blurRadius: 4,
+                                    offset: const Offset(2, 2),           // position of the shadow
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                              margin: EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    spacing: 8,
+                                    children: [
+                                      ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.asset(AppImages.dummyFoodPicture, width: 90, fit: BoxFit.fill,)),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        spacing: 2,
+                                        children: [
+                                          CustomText(text: "Burger", fontSize: 12, fontWeight: FontWeight.w600, textOverflow: TextOverflow.ellipsis,),
+                                          CustomText(text: "Mc Donald", fontSize: 8, fontWeight: FontWeight.w700, color: AppColors.textSecondary, textOverflow: TextOverflow.ellipsis,),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star, color: AppColors.success, size: 12,),
+                                              Icon(Icons.star, color: AppColors.success, size: 12,),
+                                              Icon(Icons.star, color: AppColors.success, size: 12,),
+                                              Icon(Icons.star, color: AppColors.success, size: 12,),
+                                              Icon(Icons.star, color: AppColors.success, size: 12,),
+                                            ],
+                                          ),
+                                          CustomText(text: "\$5", fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textBlue,),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    spacing: 15,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: (){},
+                                        child: Icon(Icons.favorite_border_rounded),
+                                      ),
+                                      GestureDetector(
+                                          onTap: (){},
+                                          child: Icon(Icons.add)),
+                                    ],
+                                  )
+                                ],
+                              )
+                            );
+                          },
+                        ),
+
                       ],
                     ),
                   ),
