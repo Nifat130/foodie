@@ -18,29 +18,30 @@ class NavBarScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.textWhite,
           extendBody: true,
-          body: Obx(
-            () => controller.listOfScreens[controller.currentIndex.value],
+          body: SafeArea(
+            child: Obx(
+              () => controller.listOfScreens[controller.currentIndex.value],
+            ),
           ),
           bottomNavigationBar: width > 600 ?
-          SizedBox() : Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.textWhite,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.blueGrey.withAlpha(
-                        25,
-                      ), // shadow color
-                      blurRadius: 2,
-                      offset: const Offset(4, -5), // position of the shadow
-                    ),
-                  ],
-                ),
-                margin: EdgeInsets.only(top: 30),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: SafeArea(
-                  top: false,
+          SizedBox() : SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.textWhite,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.blueGrey.withAlpha(
+                          100,
+                        ), // shadow color
+                        blurRadius: 4,
+                        offset: const Offset(4, 4), // position of the shadow
+                      ),
+                    ],
+                  ),
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -72,30 +73,30 @@ class NavBarScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                left: 0,
-                child: GestureDetector(
-                  onTap: (){
-                    controller.currentIndex.value = 2;
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.success,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Icon(
-                      Icons.shopping_cart_rounded,
-                      color: AppColors.textWhite,
-                      size: 28,
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  left: 0,
+                  child: GestureDetector(
+                    onTap: (){
+                      controller.currentIndex.value = 2;
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.success,
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Icon(
+                        Icons.shopping_cart_rounded,
+                        color: AppColors.textWhite,
+                        size: 28,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
