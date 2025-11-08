@@ -84,13 +84,14 @@ This project uses **GetX** for:
 
 | Mobile Screen Views|
 |--------------|
-![phone_first_image](https://github.com/Nifat130/foodie/blob/main/ss1.jpg?raw=true)
+
+<img src="https://github.com/Nifat130/foodie/blob/main/ss1.jpg?raw=true" width="350" alt="Home Screen" />
 
 | Web Screen Views|
 |--------------|
 
 
-🎥 **Video Demo:** [Watch Here]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link))
+🎥 **Video Demo:** ![Watch Here]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link))
 
 ---
 
