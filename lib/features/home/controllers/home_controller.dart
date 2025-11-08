@@ -57,7 +57,7 @@ class HomeController extends GetxController {
   }
 
   // Call Configuration Api
-  Future<void> requestToGetConfiguration() async {
+  void requestToGetConfiguration() async {
     isConfigurationLoading.value = true;
     final result = await apiCaller.getConfigurations();
 
@@ -69,7 +69,7 @@ class HomeController extends GetxController {
   }
 
   // Call Banner Api
-  Future<void> requestToGetBanners() async {
+  void requestToGetBanners() async {
     isBannerLoading.value = true;
 
     final result = await apiCaller.getBanners();
@@ -83,7 +83,7 @@ class HomeController extends GetxController {
   }
 
   // Call Category Api
-  Future<void> requestToGetCategories() async {
+  void requestToGetCategories() async {
     isCategoriesLoading.value = true;
 
     final result = await apiCaller.getCategories();
@@ -97,7 +97,7 @@ class HomeController extends GetxController {
   }
 
   // Call Popular Food Api
-  Future<void> requestToGetPopularFoods() async {
+  void requestToGetPopularFoods() async {
     isPopularFoodLoading.value = true;
 
     final result = await apiCaller.getPopularFoods();
@@ -111,7 +111,7 @@ class HomeController extends GetxController {
   }
 
   // Call Campaign Food Api
-  Future<void> requestToGetCampaignFoods() async {
+  void requestToGetCampaignFoods() async {
     isCampaignFoodLoading.value = true;
 
     final result = await apiCaller.getCampaigns();
@@ -125,7 +125,7 @@ class HomeController extends GetxController {
   }
 
   // Call Restaurants Api
-  Future<void> requestToGetRestaurants() async {
+  void requestToGetRestaurants() async {
     isRestaurantLoading.value = true;
 
     final result = await apiCaller.getRestaurants();
