@@ -45,13 +45,13 @@ class Product {
   List<CategoryId>? categoryIds;
   List<Variation>? variations;
   List<AddOn>? addOns;
-  Attributes? attributes;
-  Attributes? choiceOptions;
+  String? attributes;
+  String? choiceOptions;
   int? price;
   int? tax;
-  DiscountTypeEnum? taxType;
+  String? taxType;
   int? discount;
-  DiscountTypeEnum? discountType;
+  String? discountType;
   String? availableTimeStarts;
   String? availableTimeEnds;
   int? veg;
@@ -68,7 +68,7 @@ class Product {
   int? isHalal;
   int? itemStock;
   int? sellCount;
-  StockType? stockType;
+  String? stockType;
   int? tempAvailable;
   int? open;
   int? reviewsCount;
@@ -162,13 +162,13 @@ class Product {
     categoryIds: json["category_ids"] == null ? [] : List<CategoryId>.from(json["category_ids"]!.map((x) => CategoryId.fromJson(x))),
     variations: json["variations"] == null ? [] : List<Variation>.from(json["variations"]!.map((x) => Variation.fromJson(x))),
     addOns: json["add_ons"] == null ? [] : List<AddOn>.from(json["add_ons"]!.map((x) => AddOn.fromJson(x))),
-    attributes: attributesValues.map[json["attributes"]]!,
-    choiceOptions: attributesValues.map[json["choice_options"]]!,
+    attributes: json["attributes"],
+    choiceOptions: json["choice_options"],
     price: json["price"],
     tax: json["tax"],
-    taxType: discountTypeEnumValues.map[json["tax_type"]]!,
+    taxType: json["tax_type"],
     discount: json["discount"],
-    discountType: discountTypeEnumValues.map[json["discount_type"]]!,
+    discountType: json["discount_type"],
     availableTimeStarts: json["available_time_starts"],
     availableTimeEnds: json["available_time_ends"],
     veg: json["veg"],
@@ -185,7 +185,7 @@ class Product {
     isHalal: json["is_halal"],
     itemStock: json["item_stock"],
     sellCount: json["sell_count"],
-    stockType: stockTypeValues.map[json["stock_type"]]!,
+    stockType: json["stock_type"],
     tempAvailable: json["temp_available"],
     open: json["open"],
     reviewsCount: json["reviews_count"],
@@ -221,13 +221,13 @@ class Product {
     "category_ids": categoryIds == null ? [] : List<dynamic>.from(categoryIds!.map((x) => x.toJson())),
     "variations": variations == null ? [] : List<dynamic>.from(variations!.map((x) => x.toJson())),
     "add_ons": addOns == null ? [] : List<dynamic>.from(addOns!.map((x) => x.toJson())),
-    "attributes": attributesValues.reverse[attributes],
-    "choice_options": attributesValues.reverse[choiceOptions],
+    "attributes": attributes,
+    "choice_options": choiceOptions,
     "price": price,
     "tax": tax,
-    "tax_type": discountTypeEnumValues.reverse[taxType],
+    "tax_type": taxType,
     "discount": discount,
-    "discount_type": discountTypeEnumValues.reverse[discountType],
+    "discount_type": discountType,
     "available_time_starts": availableTimeStarts,
     "available_time_ends": availableTimeEnds,
     "veg": veg,
@@ -244,7 +244,7 @@ class Product {
     "is_halal": isHalal,
     "item_stock": itemStock,
     "sell_count": sellCount,
-    "stock_type": stockTypeValues.reverse[stockType],
+    "stock_type": stockType,
     "temp_available": tempAvailable,
     "open": open,
     "reviews_count": reviewsCount,
@@ -280,7 +280,7 @@ class AddOn {
   DateTime? updatedAt;
   int? restaurantId;
   int? status;
-  StockType? stockType;
+  String? stockType;
   int? addonStock;
   int? sellCount;
   dynamic addonCategoryId;
@@ -311,7 +311,7 @@ class AddOn {
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     restaurantId: json["restaurant_id"],
     status: json["status"],
-    stockType: stockTypeValues.map[json["stock_type"]]!,
+    stockType: json["stock_type"],
     addonStock: json["addon_stock"],
     sellCount: json["sell_count"],
     addonCategoryId: json["addon_category_id"],
@@ -327,7 +327,7 @@ class AddOn {
     "updated_at": updatedAt?.toIso8601String(),
     "restaurant_id": restaurantId,
     "status": status,
-    "stock_type": stockTypeValues.reverse[stockType],
+    "stock_type": stockType,
     "addon_stock": addonStock,
     "sell_count": sellCount,
     "addon_category_id": addonCategoryId,
@@ -335,16 +335,6 @@ class AddOn {
     "translations": translations == null ? [] : List<dynamic>.from(translations!.map((x) => x)),
   };
 }
-
-enum StockType {
-  LIMITED,
-  UNLIMITED
-}
-
-final stockTypeValues = EnumValues({
-  "limited": StockType.LIMITED,
-  "unlimited": StockType.UNLIMITED
-});
 
 class Allergy {
   int? id;
@@ -398,14 +388,6 @@ class AllergyPivot {
   };
 }
 
-enum Attributes {
-  EMPTY
-}
-
-final attributesValues = EnumValues({
-  "[]": Attributes.EMPTY
-});
-
 class CategoryId {
   String? id;
   int? position;
@@ -453,16 +435,6 @@ class Cuisine {
     "image": image,
   };
 }
-
-enum DiscountTypeEnum {
-  AMOUNT,
-  PERCENT
-}
-
-final discountTypeEnumValues = EnumValues({
-  "amount": DiscountTypeEnum.AMOUNT,
-  "percent": DiscountTypeEnum.PERCENT
-});
 
 class Nutrition {
   int? id;
@@ -518,7 +490,7 @@ class NutritionPivot {
 
 class Storage {
   int? id;
-  DataTypeEnum? dataType;
+  String? dataType;
   String? dataId;
   String? key;
   String? value;
@@ -537,7 +509,7 @@ class Storage {
 
   factory Storage.fromJson(Map<String, dynamic> json) => Storage(
     id: json["id"],
-    dataType: dataTypeEnumValues.map[json["data_type"]]!,
+    dataType: json["data_type"],
     dataId: json["data_id"],
     key: json["key"],
     value: json["value"],
@@ -547,7 +519,7 @@ class Storage {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "data_type": dataTypeEnumValues.reverse[dataType],
+    "data_type": dataType,
     "data_id": dataId,
     "key": key,
     "value": value,
@@ -556,20 +528,12 @@ class Storage {
   };
 }
 
-enum DataTypeEnum {
-  APP_MODELS_FOOD
-}
-
-final dataTypeEnumValues = EnumValues({
-  "App\\Models\\Food": DataTypeEnum.APP_MODELS_FOOD
-});
-
 class Translation {
   int? id;
-  DataTypeEnum? translationableType;
+  String? translationableType;
   int? translationableId;
-  Locale? locale;
-  Key? key;
+  String? locale;
+  String? key;
   String? value;
   dynamic createdAt;
   dynamic updatedAt;
@@ -587,10 +551,10 @@ class Translation {
 
   factory Translation.fromJson(Map<String, dynamic> json) => Translation(
     id: json["id"],
-    translationableType: dataTypeEnumValues.map[json["translationable_type"]]!,
+    translationableType: json["translationable_type"],
     translationableId: json["translationable_id"],
-    locale: localeValues.map[json["locale"]]!,
-    key: keyValues.map[json["key"]]!,
+    locale: json["locale"],
+    key: json["key"],
     value: json["value"],
     createdAt: json["created_at"],
     updatedAt: json["updated_at"],
@@ -598,40 +562,22 @@ class Translation {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "translationable_type": dataTypeEnumValues.reverse[translationableType],
+    "translationable_type": translationableType,
     "translationable_id": translationableId,
-    "locale": localeValues.reverse[locale],
-    "key": keyValues.reverse[key],
+    "locale": locale,
+    "key": key,
     "value": value,
     "created_at": createdAt,
     "updated_at": updatedAt,
   };
 }
 
-enum Key {
-  DESCRIPTION,
-  NAME
-}
-
-final keyValues = EnumValues({
-  "description": Key.DESCRIPTION,
-  "name": Key.NAME
-});
-
-enum Locale {
-  EN
-}
-
-final localeValues = EnumValues({
-  "en": Locale.EN
-});
-
 class Variation {
   int? variationId;
   String? name;
   String? type;
-  dynamic min;
-  dynamic max;
+  String? min;
+  String? max;
   String? required;
   List<Value>? values;
 
@@ -668,9 +614,9 @@ class Variation {
 
 class Value {
   String? label;
-  dynamic optionPrice;
+  int? optionPrice;
   String? totalStock;
-  StockType? stockType;
+  String? stockType;
   String? sellCount;
   int? optionId;
   int? currentStock;
@@ -689,7 +635,7 @@ class Value {
     label: json["label"],
     optionPrice: json["optionPrice"],
     totalStock: json["total_stock"],
-    stockType: stockTypeValues.map[json["stock_type"]]!,
+    stockType: json["stock_type"],
     sellCount: json["sell_count"],
     optionId: json["option_id"],
     currentStock: json["current_stock"],
@@ -699,21 +645,9 @@ class Value {
     "label": label,
     "optionPrice": optionPrice,
     "total_stock": totalStock,
-    "stock_type": stockTypeValues.reverse[stockType],
+    "stock_type": stockType,
     "sell_count": sellCount,
     "option_id": optionId,
     "current_stock": currentStock,
   };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

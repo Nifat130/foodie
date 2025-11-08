@@ -25,7 +25,7 @@ class NavBarButton extends StatelessWidget {
         controller.currentIndex.value = buttonNumber;
       },
       child: Obx(() =>
-      controller.currentIndex.value == 2 ?
+      controller.currentIndex.value == 2 && buttonNumber == 2 ?
           Icon(icon, color: AppColors.textWhite, size: 28,) :
           Icon(icon, color: controller.currentIndex.value == buttonNumber ? AppColors.success : buttonNumber == 2 ? AppColors.textWhite : AppColors.blueGrey, size: 28,)
       ),
