@@ -1,16 +1,113 @@
-# foodie
+Flutter Public API Integration Task
 
-A new Flutter project.
+ 🍔 Flutter Public API Integration Task
 
-## Getting Started
+ 📱 Overview
+This project is part of the **Flutter Developer Recruitment Task**.  
+The goal is to build a **mobile application using Flutter** that fetches data from a public API and displays it in a **pixel-perfect design**, following best practices in **state management**, **error handling**, and **code structure**.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+ 🎯 Task Requirements
+The app demonstrates:
+- Fetching and displaying data from multiple public API endpoints.
+- Clean and maintainable Flutter codebase.
+- Responsive UI (for both **mobile** and **web**).
+- Proper error handling and loading states.
+- State management implementation (e.g., **GetX**, **Provider**, or **Bloc**).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 🧩 Features Implemented
+✅ Fetch configuration data (base URLs and images)  
+✅ Display banner slider
+✅ Show food categories 
+✅ Display popular foods 
+✅ Display food campaigns   
+✅ Show restaurant list 
+✅ Implemented smooth scrolling and error-handling UI  
+✅ Responsive layout for **mobile** and **web**
+
+
+ ⚙️ Technologies Used
+- **Flutter**
+- **Dart**
+- **GetX** (for state management)
+- **http** (for API calls)
+- **Carousel Slider** (for banner section)
+- **LayoutBuilder** (for responsive UI)
+- **Shimmer** (for loading animations)
+
+---
+
+
+ 🚀 Getting Started
+
+ 1️⃣ Prerequisites
+- Flutter SDK (3.x or higher)
+- Android Studio / VS Code
+- Emulator or real device connected
+
+ 2️⃣ Installation
+```bash
+ Clone the repository
+git clone https://github.com/Nifat130/foodie
+
+ Navigate to the project directory
+cd <foodie>
+
+ Get all dependencies
+flutter pub get
+
+ Run the app
+flutter run
+```
+
+---
+
+ 🧠 State Management
+This project uses **GetX** for:
+- Dependency injection
+- Reactive UI updates
+- API state control (loading, success, error)
+
+---
+
+ 🧪 Error Handling
+- Network call failures are handled gracefully with error messages.
+- Empty or invalid data responses are managed with fallback UI.
+- Try-catch blocks implemented in all repository calls.
+
+---
+
+ 🧾 Screenshots & Demo
+
+| Mobile Screen Views|
+|--------------|
+| ![screenshots/home.png](https://drive.google.com/file/d/1myPIRishw1jRon9G8jiITbFdvMvrAZe_/view?usp=drive_link) | ![screenshots/home2.png](https://drive.google.com/file/d/1tXbleBwm9jEVG0hnh6bUPObm6fRYD4aQ/view?usp=drive_link) | ![screenshots/home3.png](https://drive.google.com/file/d/1I3QmD_6z9IFHf9WE8geBXnEOgM-8JeXZ/view?usp=drive_link) | 
+
+| Web Screen Views|
+|--------------|
+| ![screenshots/whome.png](https://drive.google.com/file/d/1_gI-GLzU6op6erALxSOwyQBwICMd_A2K/view?usp=drive_link) | ![screenshots/whome2.png](https://drive.google.com/file/d/1MlQGEm8dH0QmztMRhlB_OACVXt09f2c4/view?usp=drive_link) |
+
+🎥 **Video Demo:** [Watch Here]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link))
+
+---
+
+ 📄 Notes
+- The app uses public APIs from StackFood’s demo environment.
+- Data displayed is dynamic and may vary.
+- For paginated APIs, “Load More” is handled automatically.
+
+---
+
+ 🧑‍💻 Developer
+**Name:** Nifat Chowdhury Mahin 
+**Role:** Flutter Developer  
+**Email:** [cmnifat@gmail.com]  
+**GitHub:** [https://github.com/Nifat130](https://github.com/Nifat130)
+
+---
+
+ 🏁 Conclusion
+This project demonstrates a well-structured, responsive Flutter app that consumes REST APIs efficiently, maintains clean architecture, and adheres to modern Flutter development best practices.
