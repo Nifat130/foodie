@@ -84,11 +84,11 @@ This project uses **GetX** for:
 
 | Mobile Screen Views|
 |--------------|
-| ![screenshots/home.png](https://drive.google.com/file/d/1myPIRishw1jRon9G8jiITbFdvMvrAZe_/view?usp=drive_link) | ![screenshots/home2.png](https://drive.google.com/file/d/1tXbleBwm9jEVG0hnh6bUPObm6fRYD4aQ/view?usp=drive_link) | ![screenshots/home3.png](https://drive.google.com/file/d/1I3QmD_6z9IFHf9WE8geBXnEOgM-8JeXZ/view?usp=drive_link) | 
+![phone_first_image](https://github.com/Nifat130/foodie/blob/main/ss1.jpg?raw=true)
 
 | Web Screen Views|
 |--------------|
-| ![screenshots/whome.png](https://drive.google.com/file/d/1_gI-GLzU6op6erALxSOwyQBwICMd_A2K/view?usp=drive_link) | ![screenshots/whome2.png](https://drive.google.com/file/d/1MlQGEm8dH0QmztMRhlB_OACVXt09f2c4/view?usp=drive_link) |
+
 
 🎥 **Video Demo:** [Watch Here]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link))
 
