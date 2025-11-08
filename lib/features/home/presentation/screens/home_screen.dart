@@ -10,6 +10,7 @@ import 'package:foodie/features/home/presentation/widgets/actuals/campaign_widge
 import 'package:foodie/features/home/presentation/widgets/actuals/restaurant_widget.dart';
 import 'package:foodie/features/home/presentation/widgets/shimmers/app_header_shimmer.dart';
 import 'package:foodie/features/home/presentation/widgets/shimmers/banner_shimmer.dart';
+import 'package:foodie/features/home/presentation/widgets/shimmers/campaign_shimmer.dart';
 import 'package:foodie/features/home/presentation/widgets/shimmers/category_shimmer.dart';
 import 'package:foodie/features/home/presentation/widgets/shimmers/popular_food_shimmer.dart';
 import 'package:foodie/features/home/presentation/widgets/shimmers/restaurant_shimmer.dart';
@@ -120,13 +121,13 @@ class HomeScreen extends StatelessWidget {
                         // Campaign Part
                         Obx((){
                           if(controller.isCampaignFoodLoading.value){
-                            return PopularFoodShimmer();
+                            return CampaignShimmer();
                           }
                           else if(controller.campaignFoodData == null || controller.campaignFoodData.isEmpty){
                             return NoDataFoundWidget();
                           }
                           else{
-                            return PopularFoodWidget(controller: controller);
+                            return CampaignWidget(controller: controller);
                           }
                         }),
                         SizedBox(height: 8),
