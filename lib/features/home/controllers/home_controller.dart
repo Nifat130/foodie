@@ -42,16 +42,16 @@ class HomeController extends GetxController {
   void onInit() async{
     // TODO: implement onInit
     super.onInit();
-    // log("===============1=================");
-    // await requestToGetConfiguration();
-    // log("===============2=================");
-    // await requestToGetBanners();
-    // log("===============3=================");
-    // await requestToGetCategories();
-    // log("===============4=================");
-    // await requestToGetPopularFoods();
-    // log("===============5=================");
-    // await requestToGetCampaignFoods();
+    log("===============1=================");
+    await requestToGetConfiguration();
+    log("===============2=================");
+    await requestToGetBanners();
+    log("===============3=================");
+    await requestToGetCategories();
+    log("===============4=================");
+    await requestToGetPopularFoods();
+    log("===============5=================");
+    await requestToGetCampaignFoods();
     log("===============6=================");
     await requestToGetRestaurants();
   }
