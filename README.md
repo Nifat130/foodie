@@ -94,7 +94,7 @@ This project uses **GetX** for:
 <img src="https://github.com/Nifat130/foodie/blob/main/ws1.jpg?raw=true" width="250" alt="Home Screen Web 1" />
 <img src="https://github.com/Nifat130/foodie/blob/main/ws3.jpg?raw=true" width="250" alt="Home Screen Web 2" />
 
-🎥 **Video Demo:** ![Watch Here]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link))
+🎥 **Video Demo:** ![Watch Here](https://drive.google.com/file/d/1GicdG-Xn2PrWI9A_F3-uuHYeP4UXPpYw/view?usp=drive_link)
 
 ---
 
