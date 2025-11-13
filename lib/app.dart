@@ -32,13 +32,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => PlatformUtils.isIOS
           ? CupertinoTheme(data: const CupertinoThemeData(), child: child!)
           : child!,
-    );;
+    );
   }
-
-  // ThemeData _getLightTheme() {
-  //   return PlatformUtils.isIOS
-  //       ? AppTheme.lightTheme.copyWith(platform: TargetPlatform.iOS)
-  //       : AppTheme.lightTheme;
-  // }
-
 }
