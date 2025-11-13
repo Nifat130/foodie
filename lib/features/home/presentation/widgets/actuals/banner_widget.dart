@@ -38,24 +38,20 @@ class BannerWidget extends StatelessWidget {
           ),
           items: controller.bannerData.banners!.map(
                 (banner) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12,
-                    ),
-                    child: ClipRRect(
-                      borderRadius:
-                      BorderRadius.circular(16),
-                      child: FoodPicture(
-                        imageLink: banner
-                            .restaurant!
-                            .foods![0]
-                            .imageFullUrl!,
-                      ),
-                    ),
-                  );
-                },
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12,
+                ),
+                child: ClipRRect(
+                  borderRadius:
+                  BorderRadius.circular(16),
+                  child: FoodPicture(
+                    imageLink: banner
+                        .restaurant!
+                        .foods![0]
+                        .imageFullUrl!,
+                  ),
+                ),
               );
             },
           ).toList(),
