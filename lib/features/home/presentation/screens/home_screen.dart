@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                           if(controller.isPopularFoodLoading.value){
                             return PopularFoodShimmer();
                           }
-                          else if(controller.popularFoodData == null || controller.popularFoodData.products!.isEmpty){
+                          else if(controller.popularFoodData.products == null || controller.popularFoodData.products!.isEmpty){
                             return NoDataFoundWidget();
                           }
                           else {
@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                           if(controller.isRestaurantLoading.value){
                             return RestaurantShimmer();
                           }
-                          else if(controller.restaurantData == null || controller.restaurantData!.restaurants!.isEmpty){
+                          else if(controller.restaurantData.restaurants == null || controller.restaurantData.restaurants!.isEmpty){
                             return NoDataFoundWidget();
                           }
                           else{
